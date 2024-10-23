@@ -44,6 +44,8 @@ form.addEventListener("submit", (e) => {
                 .join("")}</ul>
         </div>
       `;
+            // Display the resume
+            resumeContainer.style.display = "block";
             // Make sections editable
             makeSectionsEditable();
         };
@@ -70,6 +72,8 @@ form.addEventListener("submit", (e) => {
             .join("")}</ul>
       </div>
     `;
+        // Display the resume
+        resumeContainer.style.display = "block";
         // Make sections editable
         makeSectionsEditable();
     }
