@@ -1,5 +1,5 @@
 "use strict";
-// Form, resume container, and profile preview elements
+// Get form and resume container elements
 const form = document.getElementById("resume-form");
 const resumeContainer = document.getElementById("resume");
 const profilePicInput = document.getElementById("profilePic");
@@ -39,19 +39,19 @@ form.addEventListener("submit", (e) => {
             const profilePicURL = (_a = event.target) === null || _a === void 0 ? void 0 : _a.result;
             // Dynamically update the resume with form data and profile picture
             resumeContainer.innerHTML = `
-        <div class="profile">
+        <div class="profile" contenteditable="true">
           <img src="${profilePicURL}" alt="Profile Picture" class="profile-pic">
           <h1>${name}</h1>
           <p>${email} | ${contact}</p>
         </div>
-        
-        <div class="education">
-          <h2> <i class="fa-solid fa-graduation-cap"></i> Education</h2>
+
+        <div class="education" contenteditable="true">
+          <h2><i class="fa-solid fa-graduation-cap"></i> Education</h2>
           <p>${degree}, ${institution} (${gradYear})</p>
         </div>
-        
-        <div class="skills">
-          <h2> <i class="fa-solid fa-gear"></i> Skills</h2>
+
+        <div class="skills" contenteditable="true">
+          <h2><i class="fa-solid fa-gear"></i> Skills</h2>
           <ul>${skills.map((skill) => `<li>${skill.trim()}</li>`).join("")}</ul>
         </div>
       `;
@@ -62,32 +62,21 @@ form.addEventListener("submit", (e) => {
     else {
         // Display resume without profile picture if not selected
         resumeContainer.innerHTML = `
-      <div class="profile">
+      <div class="profile" contenteditable="true">
         <h1>${name}</h1>
         <p>${email} | ${contact}</p>
       </div>
-      
-      <div class="education">
-        <h2> <i class="fa-solid fa-graduation-cap"></i> Education</h2>
+
+      <div class="education" contenteditable="true">
+        <h2><i class="fa-solid fa-graduation-cap"></i> Education</h2>
         <p>${degree}, ${institution} (${gradYear})</p>
       </div>
-      
-      <div class="skills">
-        <h2> <i class="fa-solid fa-gear"></i> Skills</h2>
+
+      <div class="skills" contenteditable="true">
+        <h2><i class="fa-solid fa-gear"></i> Skills</h2>
         <ul>${skills.map((skill) => `<li>${skill.trim()}</li>`).join("")}</ul>
       </div>
     `;
         resumeContainer.style.display = "block";
-        makeSectionsEditable();
     }
 });
-// Function to enable contenteditable for resume sections
-function makeSectionsEditable() {
-    const editableElements = resumeContainer.querySelectorAll('[contenteditable="true"]');
-    editableElements.forEach((element) => {
-        element.addEventListener("input", (event) => {
-            const target = event.target; // Cast the event target to HTMLElement
-            console.log("Content updated:", target.textContent);
-        });
-    });
-}
