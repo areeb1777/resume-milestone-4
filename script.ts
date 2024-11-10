@@ -1,27 +1,23 @@
-// Get form and resume container elements
 const form = document.getElementById("resume-form") as HTMLFormElement;
 const resumeContainer = document.getElementById("resume") as HTMLDivElement;
 const profilePicInput = document.getElementById("profilePic") as HTMLInputElement;
 const profilePreview = document.getElementById("profilePreview") as HTMLImageElement;
 
-// Profile picture preview on file selection
 profilePicInput.addEventListener("change", () => {
   const profilePicFile = profilePicInput.files?.[0];
   if (profilePicFile) {
     const reader = new FileReader();
     reader.onload = (event) => {
       profilePreview.src = event.target?.result as string;
-      profilePreview.style.display = "block"; // Show the preview image
+      profilePreview.style.display = "block";
     };
-    reader.readAsDataURL(profilePicFile); // Read the file as Data URL
+    reader.readAsDataURL(profilePicFile);
   }
 });
 
-// Form submit event listener
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  // Collect form values
   const name = (document.getElementById("name") as HTMLInputElement).value;
   const email = (document.getElementById("email") as HTMLInputElement).value;
   const contact = (document.getElementById("contact") as HTMLInputElement).value;
@@ -30,14 +26,12 @@ form.addEventListener("submit", (e) => {
   const gradYear = (document.getElementById("gradYear") as HTMLInputElement).value;
   const skills = (document.getElementById("skills") as HTMLInputElement).value.split(",");
 
-  // Check if profile picture file is available and add to resume
   const profilePicFile = profilePicInput.files?.[0];
   if (profilePicFile) {
     const reader = new FileReader();
     reader.onload = (event) => {
       const profilePicURL = event.target?.result as string;
 
-      // Dynamically update the resume with form data and profile picture
       resumeContainer.innerHTML = `
         <div class="profile" contenteditable="true">
           <img src="${profilePicURL}" alt="Profile Picture" class="profile-pic">
@@ -59,7 +53,6 @@ form.addEventListener("submit", (e) => {
     };
     reader.readAsDataURL(profilePicFile);
   } else {
-    // Display resume without profile picture if not selected
     resumeContainer.innerHTML = `
       <div class="profile" contenteditable="true">
         <h1>${name}</h1>
